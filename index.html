@@ -1,14 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>MM2 Hub</title>
+  <meta charset="UTF-8">
+  <title>MM2 Showcase Hub</title>
   <style>
-    body { font-family: sans-serif; background: #121212; color: white; text-align: center; padding: 40px; }
-    h1 { color: #00ffcc; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0d0d0d;
+      color: #ffffff;
+      text-align: center;
+      padding: 30px;
+    }
+    
+    h1 {
+      color: #ff0055;
+      text-shadow: 0 0 10px #ff0055;
+    }
+
+    .container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .card {
+      background: #1a1a1a;
+      border: 2px solid #333;
+      border-radius: 12px;
+      padding: 20px;
+      width: 220px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      border-color: #00ffcc;
+    }
+
+    .icon {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      background-color: #00ffcc;
+      color: #000;
+      border: none;
+      padding: 10px 18px;
+      font-weight: bold;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:active {
+      background-color: #00cca3;
+    }
   </style>
 </head>
 <body>
-  <h1>Welcome to My MM2 Site</h1>
-  <p>Created directly from my iPad!</p>
+
+  <h1>MM2 Inventory & Info Hub</h1>
+  <p>Tap the buttons below to interact with the items!</p>
+
+  <div class="container">
+    <!-- Item Card 1 -->
+    <div class="card">
+      <img src="https://p7.hiclipart.com/preview/771/94/385/roblox-knife-wikia-murder-mystery-game-knife.jpg" alt="Chroma Knife" class="icon">
+      <h3>Chroma Knife</h3>
+      <button onclick="showAlert('Chroma Knife: Ultra rare godly item!')">View Stats</button>
+    </div>
+
+    <!-- Item Card 2 -->
+    <div class="card">
+      <img src="https://www.kindpng.com/picc/m/288-2887319_transparent-mystery-person-png-murder-mystery-2-png.png" alt="MM2 Badge" class="icon">
+      <h3>Game Badge</h3>
+      <button onclick="showAlert('Official MM2 Fan Showcase Page')">Info</button>
+    </div>
+  </div>
+
+  <script>
+    function showAlert(message) {
+      alert(message);
+    }
+  </script>
+
 </body>
 </html>
