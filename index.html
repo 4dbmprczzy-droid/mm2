@@ -7,32 +7,24 @@
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f7f0fb;
+      background-color: #ffe6f0; /* Light pink background */
       color: #4a4a4a;
       margin: 0;
       padding: 20px;
     }
     
-    /* Header & Cart Button */
+    /* Header Container */
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #ffffff;
-      padding: 15px 25px;
-      border-radius: 16px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+      margin-bottom: 25px;
     }
 
-    .shop-title {
-      color: #9c88ff;
-      margin: 0;
-      font-size: 24px;
-    }
-
+    /* Cart Button positioned top left */
     .cart-btn {
       background: #bae7ff;
-      color: #1890ff;
+      color: #0050b3;
       border: 2px solid #91d5ff;
       padding: 10px 20px;
       border-radius: 20px;
@@ -46,13 +38,20 @@
       background: #91d5ff;
       transform: scale(1.05);
     }
+
+    .shop-title {
+      color: #9c88ff;
+      margin: 0;
+      font-size: 26px;
+    }
     
-    /* Shop Grid */
-    .shop-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    /* Shop Container - Row layout to display items side-by-side */
+    .shop-row {
+      display: flex;
+      flex-direction: row;
       gap: 20px;
-      margin-top: 25px;
+      justify-content: flex-start;
+      flex-wrap: wrap; /* Allows wrapping on small screens */
     }
 
     .item-card {
@@ -60,8 +59,9 @@
       border-radius: 16px;
       padding: 20px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
       border: 2px solid #ffd6e7;
+      width: 220px;
       transition: transform 0.2s;
     }
 
@@ -72,11 +72,24 @@
     .item-card:nth-child(2) { border-color: #bae7ff; }
     .item-card:nth-child(3) { border-color: #d9f7be; }
 
-    .item-title {
-      font-size: 18px;
+    /* Weapon title converted into a styled pastel button */
+    .title-btn {
+      background-color: #fff0f6;
+      color: #c41d7f;
+      border: 2px solid #ffadd2;
+      padding: 8px 12px;
+      border-radius: 12px;
+      font-size: 15px;
       font-weight: bold;
-      color: #595959;
-      margin-bottom: 8px;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 12px;
+      transition: background-color 0.2s;
+    }
+
+    .title-btn:hover {
+      background-color: #ffadd2;
+      color: #ffffff;
     }
 
     .item-price {
@@ -122,12 +135,12 @@
       display: none;
       position: fixed;
       top: 0;
-      right: 0;
+      left: 0; /* Left side slide-out drawer */
       width: 320px;
       height: 100%;
       background: #ffffff;
       padding: 25px;
-      box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+      box-shadow: 5px 0 25px rgba(0,0,0,0.1);
       box-sizing: border-box;
       z-index: 100;
     }
@@ -183,13 +196,16 @@
 <body>
 
   <div class="header">
-    <h1 class="shop-title">MM2 Pastel Shop</h1>
+    <!-- Cart button placed on the top left -->
     <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
+    <h1 class="shop-title">MM2 Pastel Shop</h1>
   </div>
 
-  <div class="shop-grid">
+  <!-- Items positioned side-by-side -->
+  <div class="shop-row">
+    
     <div class="item-card">
-      <div class="item-title">Godly Chroma Darkbringer</div>
+      <button class="title-btn" onclick="viewDetails('Godly Chroma Darkbringer')">Godly Chroma Darkbringer</button>
       <div class="item-price">500 Coins</div>
       <div class="btn-group">
         <button class="btn btn-add" onclick="addToCart('Chroma Darkbringer', 500)">Add to Cart</button>
@@ -198,7 +214,7 @@
     </div>
 
     <div class="item-card">
-      <div class="item-title">Godly Icebreaker</div>
+      <button class="title-btn" onclick="viewDetails('Godly Icebreaker')">Godly Icebreaker</button>
       <div class="item-price">450 Coins</div>
       <div class="btn-group">
         <button class="btn btn-add" onclick="addToCart('Icebreaker', 450)">Add to Cart</button>
@@ -207,16 +223,17 @@
     </div>
 
     <div class="item-card">
-      <div class="item-title">Ancient Batwing</div>
+      <button class="title-btn" onclick="viewDetails('Ancient Batwing')">Ancient Batwing</button>
       <div class="item-price">300 Coins</div>
       <div class="btn-group">
         <button class="btn btn-add" onclick="addToCart('Batwing', 300)">Add to Cart</button>
         <button class="btn btn-buy" onclick="buyNow('Batwing', 300)">Buy Now</button>
       </div>
     </div>
+
   </div>
 
-  <!-- Cart Drawer -->
+  <!-- Cart Modal Drawer -->
   <div class="cart-modal" id="cartModal">
     <div class="cart-header">
       <h2>Your Cart 🛒</h2>
@@ -237,6 +254,10 @@
 
     function buyNow(itemName, price) {
       alert(`Proceeding to instant checkout for: ${itemName} (${price} Coins)`);
+    }
+
+    function viewDetails(itemName) {
+      alert(`You clicked on the item button for: ${itemName}`);
     }
 
     function toggleCart() {
