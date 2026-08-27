@@ -1,91 +1,138 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MM2 Showcase Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Pink Showcase Hub</title>
+  <!-- Google Fonts for custom stylish text -->
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #0d0d0d;
-      color: #ffffff;
-      text-align: center;
-      padding: 30px;
-    }
-    
-    h1 {
-      color: #ff0055;
-      text-shadow: 0 0 10px #ff0055;
+      font-family: 'Nunito', sans-serif;
+      background-color: #fff0f5;
+      color: #ff3399;
+      margin: 0;
+      padding: 0;
     }
 
-    .container {
+    /* Top Navigation Bar */
+    .navbar {
       display: flex;
-      justify-content: center;
-      gap: 20px;
-      flex-wrap: wrap;
-      margin-top: 30px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 25px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 10px rgba(255, 105, 180, 0.15);
     }
 
-    .card {
-      background: #1a1a1a;
-      border: 2px solid #333;
-      border-radius: 12px;
-      padding: 20px;
-      width: 220px;
-      transition: transform 0.2s, border-color 0.2s;
+    .site-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 28px;
+      color: #ff69b4;
+      text-shadow: 2px 2px 0px #ffe4e1;
     }
 
-    .card:hover {
-      transform: scale(1.05);
-      border-color: #00ffcc;
+    .nav-icons {
+      font-size: 20px;
     }
 
-    .icon {
-      width: 80px;
-      height: 80px;
-      margin-bottom: 15px;
+    /* Main Banner Area */
+    .banner {
+      background: linear-gradient(135deg, #ffb6c1, #ff69b4);
+      margin: 20px;
+      padding: 40px 20px;
+      border-radius: 25px;
+      color: white;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
     }
 
-    button {
-      background-color: #00ffcc;
-      color: #000;
-      border: none;
-      padding: 10px 18px;
+    .banner h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 32px;
+      margin: 0 0 10px 0;
+    }
+
+    /* Scrollable Pill Buttons */
+    .category-scroll {
+      display: flex;
+      gap: 12px;
+      padding: 10px 20px;
+      overflow-x: auto;
+    }
+
+    .pill-btn {
+      background-color: #ffe6f0;
+      border: 2px solid #ff99cc;
+      color: #ff007f;
+      padding: 10px 22px;
+      border-radius: 30px;
+      font-size: 16px;
       font-weight: bold;
-      border-radius: 6px;
+      white-space: nowrap;
       cursor: pointer;
     }
 
-    button:active {
-      background-color: #00cca3;
+    .pill-btn.active {
+      background-color: #ffb6c1;
+      border-color: #ff69b4;
+      color: white;
+    }
+
+    /* Title & Action Section */
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .section-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: 28px;
+      color: #ff3399;
+    }
+
+    .shop-all-btn {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
     }
   </style>
 </head>
 <body>
 
-  <h1>MM2 Inventory & Info Hub</h1>
-  <p>Tap the buttons below to interact with the items!</p>
-
-  <div class="container">
-    <!-- Item Card 1 -->
-    <div class="card">
-      <img src="https://p7.hiclipart.com/preview/771/94/385/roblox-knife-wikia-murder-mystery-game-knife.jpg" alt="Chroma Knife" class="icon">
-      <h3>Chroma Knife</h3>
-      <button onclick="showAlert('Chroma Knife: Ultra rare godly item!')">View Stats</button>
-    </div>
-
-    <!-- Item Card 2 -->
-    <div class="card">
-      <img src="https://www.kindpng.com/picc/m/288-2887319_transparent-mystery-person-png-murder-mystery-2-png.png" alt="MM2 Badge" class="icon">
-      <h3>Game Badge</h3>
-      <button onclick="showAlert('Official MM2 Fan Showcase Page')">Info</button>
-    </div>
+  <!-- Top Header with custom title -->
+  <div class="navbar">
+    <div style="font-size: 22px;">☰</div>
+    <div class="site-title">YOUR SITE NAME</div>
+    <div class="nav-icons">🔍 🛒</div>
   </div>
 
-  <script>
-    function showAlert(message) {
-      alert(message);
-    }
-  </script>
+  <!-- Big Pink Banner -->
+  <div class="banner">
+    <h2>Welcome to My Page!</h2>
+    <p>Custom pink layout made directly on iPad</p>
+  </div>
+
+  <!-- Pill Buttons -->
+  <div class="category-scroll">
+    <button class="pill-btn active">🔪 Murder Mystery 2</button>
+    <button class="pill-btn">🧸 Adopt Me</button>
+    <button class="pill-btn">🏠 Showcase</button>
+  </div>
+
+  <!-- Section Title and Button -->
+  <div class="section-header">
+    <div class="section-title">MM2</div>
+    <button class="shop-all-btn">EXPLORE ALL</button>
+  </div>
 
 </body>
 </html>
