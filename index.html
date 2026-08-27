@@ -1,21 +1,20 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Pink Showcase Hub</title>
-  <!-- Google Fonts for custom stylish text -->
+  <title>MM2 Weapon Shop</title>
+  <!-- Google Font for stylish typography -->
   <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Nunito', sans-serif;
+      font-family: 'Fredoka One', cursive;
       background-color: #fff0f5;
       color: #ff3399;
       margin: 0;
       padding: 0;
     }
 
-    /* Top Navigation Bar */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -26,113 +25,176 @@
     }
 
     .site-title {
-      font-family: 'Fredoka One', cursive;
       font-size: 28px;
       color: #ff69b4;
-      text-shadow: 2px 2px 0px #ffe4e1;
     }
 
-    .nav-icons {
-      font-size: 20px;
-    }
-
-    /* Main Banner Area */
-    .banner {
-      background: linear-gradient(135deg, #ffb6c1, #ff69b4);
-      margin: 20px;
-      padding: 40px 20px;
-      border-radius: 25px;
-      color: white;
-      text-align: center;
-      box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
-    }
-
-    .banner h2 {
-      font-family: 'Fredoka One', cursive;
-      font-size: 32px;
-      margin: 0 0 10px 0;
-    }
-
-    /* Scrollable Pill Buttons */
-    .category-scroll {
+    /* Shop Grid Layout */
+    .shop-grid {
       display: flex;
-      gap: 12px;
-      padding: 10px 20px;
-      overflow-x: auto;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 30px;
     }
 
-    .pill-btn {
-      background-color: #ffe6f0;
-      border: 2px solid #ff99cc;
-      color: #ff007f;
-      padding: 10px 22px;
-      border-radius: 30px;
-      font-size: 16px;
-      font-weight: bold;
-      white-space: nowrap;
-      cursor: pointer;
-    }
-
-    .pill-btn.active {
-      background-color: #ffb6c1;
-      border-color: #ff69b4;
-      color: white;
-    }
-
-    /* Title & Action Section */
-    .section-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+    .item-card {
+      background: white;
+      border: 3px solid #ffccd5;
+      border-radius: 20px;
       padding: 20px;
+      width: 200px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(255, 105, 180, 0.1);
     }
 
-    .section-title {
-      font-family: 'Fredoka One', cursive;
-      font-size: 28px;
-      color: #ff3399;
+    .item-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
     }
 
-    .shop-all-btn {
+    .item-title {
+      font-size: 20px;
+      margin: 12px 0 5px 0;
+      color: #ff007f;
+    }
+
+    .item-price {
+      font-size: 18px;
+      color: #28a745;
+      margin-bottom: 12px;
+    }
+
+    /* Dynamic Item Button */
+    .buy-item-btn {
       background-color: #ff69b4;
       color: white;
       border: none;
-      padding: 12px 24px;
+      padding: 10px 14px;
       border-radius: 12px;
-      font-weight: bold;
+      font-family: 'Fredoka One', cursive;
       font-size: 14px;
       cursor: pointer;
-      box-shadow: 0 4px 8px rgba(255, 105, 180, 0.3);
+      width: 100%;
+      box-shadow: 0 3px 6px rgba(255, 105, 180, 0.3);
     }
+
+    /* Modal Detail Window */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 25px;
+      border-radius: 25px;
+      text-align: center;
+      width: 310px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    /* Picture next to buttons container */
+    .product-detail-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      gap: 15px;
+      margin: 15px 0;
+    }
+
+    .product-detail-box img {
+      width: 90px;
+      height: 90px;
+      object-fit: contain;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .action-btn {
+      padding: 10px;
+      border-radius: 12px;
+      border: none;
+      font-family: 'Fredoka One', cursive;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .add-cart { background-color: #ffe6f0; color: #ff007f; border: 2px solid #ff99cc; }
+    .buy-now { background-color: #ff007f; color: white; }
+    .close-btn { background-color: #eee; color: #555; margin-top: 10px; width: 100%; }
   </style>
 </head>
 <body>
 
-  <!-- Top Header with custom title -->
   <div class="navbar">
-    <div style="font-size: 22px;">☰</div>
-    <div class="site-title">YOUR SITE NAME</div>
-    <div class="nav-icons">🔍 🛒</div>
+    <div class="site-title">MM2 STORE</div>
+    <div style="font-size: 24px;">🛒</div>
   </div>
 
-  <!-- Big Pink Banner -->
-  <div class="banner">
-    <h2>Welcome to My Page!</h2>
-    <p>Custom pink layout made directly on iPad</p>
+  <div class="shop-grid">
+    <!-- Item 1: Knife -->
+    <div class="item-card">
+      <img src="https://p7.hiclipart.com/preview/771/94/385/roblox-knife-wikia-murder-mystery-game-knife.jpg" alt="Chroma Knife">
+      <div class="item-title">Chroma Knife</div>
+      <div class="item-price">$4.99</div>
+      <button class="buy-item-btn" onclick="openProduct('Chroma Knife', '$4.99', 'https://p7.hiclipart.com/preview/771/94/385/roblox-knife-wikia-murder-mystery-game-knife.jpg')">
+        Buy Chroma Knife
+      </button>
+    </div>
+
+    <!-- Item 2: Gun -->
+    <div class="item-card">
+      <img src="https://p7.hiclipart.com/preview/771/94/385/roblox-knife-wikia-murder-mystery-game-knife.jpg" alt="Ray Gun">
+      <div class="item-title">Ray Gun</div>
+      <div class="item-price">$6.99</div>
+      <button class="buy-item-btn" onclick="openProduct('Ray Gun', '$6.99', 'https://p7.hiclipart.com/preview/771/94/385/roblox-knife-wikia-murder-mystery-game-knife.jpg')">
+        Buy Ray Gun
+      </button>
+    </div>
   </div>
 
-  <!-- Pill Buttons -->
-  <div class="category-scroll">
-    <button class="pill-btn active">🔪 Murder Mystery 2</button>
-    <button class="pill-btn">🧸 Adopt Me</button>
-    <button class="pill-btn">🏠 Showcase</button>
+  <!-- Detail Screen Modal -->
+  <div class="modal" id="productModal">
+    <div class="modal-content">
+      <h2 id="modalTitle" class="item-title" style="font-size: 24px;"></h2>
+      <div id="modalPrice" class="item-price"></div>
+      
+      <!-- Container showing the image next to the options -->
+      <div class="product-detail-box">
+        <img id="modalImg" src="" alt="Weapon">
+        <div class="btn-group">
+          <button class="action-btn add-cart" onclick="alert('Added to cart!')">Add to Cart</button>
+          <button class="action-btn buy-now" onclick="alert('Proceeding to checkout!')">Buy Now</button>
+        </div>
+      </div>
+
+      <button class="action-btn close-btn" onclick="closeProduct()">Back to Shop</button>
+    </div>
   </div>
 
-  <!-- Section Title and Button -->
-  <div class="section-header">
-    <div class="section-title">MM2</div>
-    <button class="shop-all-btn">EXPLORE ALL</button>
-  </div>
+  <script>
+    function openProduct(name, price, imgSrc) {
+      document.getElementById('modalTitle').innerText = name;
+      document.getElementById('modalPrice').innerText = price;
+      document.getElementById('modalImg').src = imgSrc;
+      document.getElementById('productModal').style.display = 'flex';
+    }
+
+    function closeProduct() {
+      document.getElementById('productModal').style.display = 'none';
+    }
+  </script>
 
 </body>
 </html>
