@@ -3,196 +3,274 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MM2 Weapon Shop</title>
-  <!-- Google Font for stylish typography -->
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@700&display=swap" rel="stylesheet">
+  <title>MM2 Pastel Weapon Shop</title>
   <style>
     body {
-      font-family: 'Fredoka One', cursive;
-      background-color: #fff0f5;
-      color: #ff3399;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f7f0fb;
+      color: #4a4a4a;
       margin: 0;
-      padding: 0;
+      padding: 20px;
     }
-
-    .navbar {
+    
+    /* Header & Cart Button */
+    .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      background: #ffffff;
       padding: 15px 25px;
-      background-color: #ffffff;
-      box-shadow: 0 2px 10px rgba(255, 105, 180, 0.15);
+      border-radius: 16px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     }
 
-    .site-title {
-      font-size: 28px;
-      color: #ff69b4;
+    .shop-title {
+      color: #9c88ff;
+      margin: 0;
+      font-size: 24px;
     }
 
-    /* Shop Grid Layout */
+    .cart-btn {
+      background: #bae7ff;
+      color: #1890ff;
+      border: 2px solid #91d5ff;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: bold;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    .cart-btn:hover {
+      background: #91d5ff;
+      transform: scale(1.05);
+    }
+    
+    /* Shop Grid */
     .shop-grid {
-      display: flex;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
-      flex-wrap: wrap;
-      padding: 30px;
+      margin-top: 25px;
     }
 
     .item-card {
-      background: white;
-      border: 3px solid #ffccd5;
-      border-radius: 20px;
+      background: #ffffff;
+      border-radius: 16px;
       padding: 20px;
-      width: 200px;
       text-align: center;
-      box-shadow: 0 4px 12px rgba(255, 105, 180, 0.1);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+      border: 2px solid #ffd6e7;
+      transition: transform 0.2s;
     }
 
-    .item-card img {
-      width: 100px;
-      height: 100px;
-      object-fit: contain;
+    .item-card:hover {
+      transform: translateY(-5px);
     }
+
+    .item-card:nth-child(2) { border-color: #bae7ff; }
+    .item-card:nth-child(3) { border-color: #d9f7be; }
 
     .item-title {
-      font-size: 20px;
-      margin: 12px 0 5px 0;
-      color: #ff007f;
+      font-size: 18px;
+      font-weight: bold;
+      color: #595959;
+      margin-bottom: 8px;
     }
 
     .item-price {
-      font-size: 18px;
-      color: #28a745;
-      margin-bottom: 12px;
+      color: #722ed1;
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 15px;
+    }
+    
+    /* Action Buttons */
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
     }
 
-    /* Dynamic Item Button */
-    .buy-item-btn {
-      background-color: #ff69b4;
-      color: white;
+    .btn {
       border: none;
       padding: 10px 14px;
       border-radius: 12px;
-      font-family: 'Fredoka One', cursive;
-      font-size: 14px;
       cursor: pointer;
-      width: 100%;
-      box-shadow: 0 3px 6px rgba(255, 105, 180, 0.3);
+      font-weight: bold;
+      font-size: 13px;
+      transition: opacity 0.2s;
     }
 
-    /* Modal Detail Window */
-    .modal {
+    .btn-add {
+      background: #ffd6e7;
+      color: #c41d7f;
+    }
+
+    .btn-buy {
+      background: #d9f7be;
+      color: #389e0d;
+    }
+
+    .btn:hover {
+      opacity: 0.8;
+    }
+
+    /* Cart Modal Drawer */
+    .cart-modal {
       display: none;
       position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-    }
-
-    .modal-content {
-      background: white;
+      top: 0;
+      right: 0;
+      width: 320px;
+      height: 100%;
+      background: #ffffff;
       padding: 25px;
-      border-radius: 25px;
-      text-align: center;
-      width: 310px;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+      box-sizing: border-box;
+      z-index: 100;
     }
 
-    /* Picture next to buttons container */
-    .product-detail-box {
+    .cart-modal.open {
+      display: block;
+    }
+
+    .cart-header {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      justify-content: space-around;
-      gap: 15px;
-      margin: 15px 0;
+      border-bottom: 2px solid #f0f0f0;
+      padding-bottom: 10px;
     }
 
-    .product-detail-box img {
-      width: 90px;
-      height: 90px;
-      object-fit: contain;
+    .cart-items {
+      list-style: none;
+      padding: 0;
+      margin-top: 15px;
+      max-height: 55vh;
+      overflow-y: auto;
     }
 
-    .btn-group {
+    .cart-items li {
       display: flex;
-      flex-direction: column;
-      gap: 10px;
-      width: 100%;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #fafafa;
+      color: #595959;
     }
 
-    .action-btn {
-      padding: 10px;
-      border-radius: 12px;
+    .close-btn {
+      background: #ffccc7;
+      color: #cf1322;
       border: none;
-      font-family: 'Fredoka One', cursive;
-      font-size: 14px;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-weight: bold;
       cursor: pointer;
     }
 
-    .add-cart { background-color: #ffe6f0; color: #ff007f; border: 2px solid #ff99cc; }
-    .buy-now { background-color: #ff007f; color: white; }
-    .close-btn { background-color: #eee; color: #555; margin-top: 10px; width: 100%; }
+    .checkout-btn {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      border-radius: 12px;
+      margin-top: 15px;
+    }
   </style>
 </head>
 <body>
 
-  <div class="navbar">
-    <div class="site-title">MM2 STORE</div>
-    <div style="font-size: 24px;">🛒</div>
+  <div class="header">
+    <h1 class="shop-title">MM2 Pastel Shop</h1>
+    <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
   </div>
 
   <div class="shop-grid">
-    <!-- Item 1: Knife -->
     <div class="item-card">
-      <img src="https://p7.hiclipart.com/preview/771/94/385/roblox-knife-wikia-murder-mystery-game-knife.jpg" alt="Chroma Knife">
-      <div class="item-title">Chroma Knife</div>
-      <div class="item-price">$4.99</div>
-      <button class="buy-item-btn" onclick="openProduct('Chroma Knife', '$4.99', 'https://p7.hiclipart.com/preview/771/94/385/roblox-knife-wikia-murder-mystery-game-knife.jpg')">
-        Buy Chroma Knife
-      </button>
+      <div class="item-title">Godly Chroma Darkbringer</div>
+      <div class="item-price">500 Coins</div>
+      <div class="btn-group">
+        <button class="btn btn-add" onclick="addToCart('Chroma Darkbringer', 500)">Add to Cart</button>
+        <button class="btn btn-buy" onclick="buyNow('Chroma Darkbringer', 500)">Buy Now</button>
+      </div>
     </div>
 
-    <!-- Item 2: Gun -->
     <div class="item-card">
-      <img src="https://p7.hiclipart.com/preview/771/94/385/roblox-knife-wikia-murder-mystery-game-knife.jpg" alt="Ray Gun">
-      <div class="item-title">Ray Gun</div>
-      <div class="item-price">$6.99</div>
-      <button class="buy-item-btn" onclick="openProduct('Ray Gun', '$6.99', 'https://p7.hiclipart.com/preview/771/94/385/roblox-knife-wikia-murder-mystery-game-knife.jpg')">
-        Buy Ray Gun
-      </button>
+      <div class="item-title">Godly Icebreaker</div>
+      <div class="item-price">450 Coins</div>
+      <div class="btn-group">
+        <button class="btn btn-add" onclick="addToCart('Icebreaker', 450)">Add to Cart</button>
+        <button class="btn btn-buy" onclick="buyNow('Icebreaker', 450)">Buy Now</button>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <div class="item-title">Ancient Batwing</div>
+      <div class="item-price">300 Coins</div>
+      <div class="btn-group">
+        <button class="btn btn-add" onclick="addToCart('Batwing', 300)">Add to Cart</button>
+        <button class="btn btn-buy" onclick="buyNow('Batwing', 300)">Buy Now</button>
+      </div>
     </div>
   </div>
 
-  <!-- Detail Screen Modal -->
-  <div class="modal" id="productModal">
-    <div class="modal-content">
-      <h2 id="modalTitle" class="item-title" style="font-size: 24px;"></h2>
-      <div id="modalPrice" class="item-price"></div>
-      
-      <!-- Container showing the image next to the options -->
-      <div class="product-detail-box">
-        <img id="modalImg" src="" alt="Weapon">
-        <div class="btn-group">
-          <button class="action-btn add-cart" onclick="alert('Added to cart!')">Add to Cart</button>
-          <button class="action-btn buy-now" onclick="alert('Proceeding to checkout!')">Buy Now</button>
-        </div>
-      </div>
-
-      <button class="action-btn close-btn" onclick="closeProduct()">Back to Shop</button>
+  <!-- Cart Drawer -->
+  <div class="cart-modal" id="cartModal">
+    <div class="cart-header">
+      <h2>Your Cart 🛒</h2>
+      <button class="close-btn" onclick="toggleCart()">✕</button>
     </div>
+    <ul class="cart-items" id="cartList"></ul>
+    <h3>Total: <span id="cartTotal">0</span> Coins</h3>
+    <button class="btn btn-buy checkout-btn" onclick="checkout()">Buy Now (Checkout)</button>
   </div>
 
   <script>
-    function openProduct(name, price, imgSrc) {
-      document.getElementById('modalTitle').innerText = name;
-      document.getElementById('modalPrice').innerText = price;
-      document.getElementById('modalImg').src = imgSrc;
-      document.getElementById('productModal').style.display = 'flex';
+    let cart = [];
+
+    function addToCart(itemName, price) {
+      cart.push({ name: itemName, price: price });
+      updateCartUI();
     }
 
-    function closeProduct() {
-      document.getElementById('productModal').style.display = 'none';
+    function buyNow(itemName, price) {
+      alert(`Proceeding to instant checkout for: ${itemName} (${price} Coins)`);
+    }
+
+    function toggleCart() {
+      document.getElementById('cartModal').classList.toggle('open');
+    }
+
+    function updateCartUI() {
+      const cartList = document.getElementById('cartList');
+      const cartCount = document.getElementById('cart-count');
+      const cartTotal = document.getElementById('cartTotal');
+      
+      cartList.innerHTML = '';
+      let total = 0;
+
+      cart.forEach((item) => {
+        const li = document.createElement('li');
+        li.textContent = `${item.name} - ${item.price} Coins`;
+        cartList.appendChild(li);
+        total += item.price;
+      });
+
+      cartCount.textContent = cart.length;
+      cartTotal.textContent = total;
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+      alert(`Successfully purchased ${cart.length} item(s) for ${document.getElementById('cartTotal').textContent} Coins!`);
+      cart = [];
+      updateCartUI();
+      toggleCart();
     }
   </script>
 
