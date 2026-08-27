@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GabsLabs - MM2 Shop</title>
-  <!-- Google Font import for a cool, stylized look -->
+  <!-- Google Fonts import for Sniglet (Bubble Font) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Sniglet:wght@800&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,16 +17,21 @@
       padding: 20px;
     }
     
-    /* Header Container */
+    /* Header Container - Relative positioning allows absolute placement of cart button */
     .header {
+      position: relative;
       display: flex;
-      justify-content: space-between;
+      justify-content: center; /* Centering GabsLabs title */
       align-items: center;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
+      padding-top: 10px;
     }
 
-    /* Cart Button positioned top left */
+    /* Cart Button placed top right */
     .cart-btn {
+      position: absolute;
+      right: 0;
+      top: 0;
       background: #bae7ff;
       color: #0050b3;
       border: 2px solid #91d5ff;
@@ -43,22 +48,23 @@
       transform: scale(1.05);
     }
 
-    /* Cool stylized pink GabsLabs title */
+    /* Pink Bubble Font for GabsLabs */
     .shop-title {
-      font-family: 'Fredoka', cursive, sans-serif;
-      color: #ff4d94;
+      font-family: 'Sniglet', cursive, sans-serif;
+      color: #ff3385;
       margin: 0;
-      font-size: 36px;
-      letter-spacing: 1px;
-      text-shadow: 2px 2px 0px #ffb3d1;
+      font-size: 48px;
+      letter-spacing: 2px;
+      text-shadow: 3px 3px 0px #ff99c2;
+      text-align: center;
     }
     
-    /* Shop Container - Row layout to display items side-by-side */
+    /* Shop Container - Horizontal row layout */
     .shop-row {
       display: flex;
       flex-direction: row;
       gap: 20px;
-      justify-content: flex-start;
+      justify-content: center;
       flex-wrap: wrap;
     }
 
@@ -80,6 +86,15 @@
     .item-card:nth-child(2) { border-color: #bae7ff; }
     .item-card:nth-child(3) { border-color: #d9f7be; }
 
+    /* Item Thumbnail Image Styling */
+    .item-image {
+      width: 100%;
+      height: 140px;
+      object-fit: contain;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+
     /* Weapon title button */
     .title-btn {
       background-color: #fff0f6;
@@ -87,7 +102,7 @@
       border: 2px solid #ffadd2;
       padding: 8px 12px;
       border-radius: 12px;
-      font-size: 15px;
+      font-size: 14px;
       font-weight: bold;
       cursor: pointer;
       width: 100%;
@@ -103,7 +118,7 @@
     .item-price {
       color: #722ed1;
       font-weight: bold;
-      font-size: 16px;
+      font-size: 18px;
       margin-bottom: 15px;
     }
     
@@ -138,17 +153,17 @@
       opacity: 0.8;
     }
 
-    /* Cart Modal Drawer */
+    /* Cart Modal Drawer (Slides from Right) */
     .cart-modal {
       display: none;
       position: fixed;
       top: 0;
-      left: 0;
+      right: 0;
       width: 320px;
       height: 100%;
       background: #ffffff;
       padding: 25px;
-      box-shadow: 5px 0 25px rgba(0,0,0,0.1);
+      box-shadow: -5px 0 25px rgba(0,0,0,0.1);
       box-sizing: border-box;
       z-index: 100;
     }
@@ -204,36 +219,40 @@
 <body>
 
   <div class="header">
-    <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
     <h1 class="shop-title">GabsLabs</h1>
+    <!-- Cart button placed on the top right -->
+    <button class="cart-btn" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</button>
   </div>
 
   <div class="shop-row">
     
     <div class="item-card">
+      <img src="https://i.ebayimg.com/images/g/E1IAAeSwO61ptkDy/s-l1200.jpg" alt="Godly Chroma Darkbringer" class="item-image">
       <button class="title-btn" onclick="viewDetails('Godly Chroma Darkbringer')">Godly Chroma Darkbringer</button>
-      <div class="item-price">500 Coins</div>
+      <div class="item-price">$5.99</div>
       <div class="btn-group">
-        <button class="btn btn-add" onclick="addToCart('Chroma Darkbringer', 500)">Add to Cart</button>
-        <button class="btn btn-buy" onclick="buyNow('Chroma Darkbringer', 500)">Buy Now</button>
+        <button class="btn btn-add" onclick="addToCart('Chroma Darkbringer', 5.99)">Add to Cart</button>
+        <button class="btn btn-buy" onclick="buyNow('Chroma Darkbringer', 5.99)">Buy Now</button>
       </div>
     </div>
 
     <div class="item-card">
+      <img src="https://i.ebayimg.com/images/g/O9EAAOSwXYVnhEbY/s-l1200.jpg" alt="Godly Icebreaker" class="item-image">
       <button class="title-btn" onclick="viewDetails('Godly Icebreaker')">Godly Icebreaker</button>
-      <div class="item-price">450 Coins</div>
+      <div class="item-price">$4.50</div>
       <div class="btn-group">
-        <button class="btn btn-add" onclick="addToCart('Icebreaker', 450)">Add to Cart</button>
-        <button class="btn btn-buy" onclick="buyNow('Icebreaker', 450)">Buy Now</button>
+        <button class="btn btn-add" onclick="addToCart('Icebreaker', 4.50)">Add to Cart</button>
+        <button class="btn btn-buy" onclick="buyNow('Icebreaker', 4.50)">Buy Now</button>
       </div>
     </div>
 
     <div class="item-card">
+      <img src="https://media.sketchfab.com/models/3ed1830d64e940df86d57cd7d71e82a0/thumbnails/6b09a4e34c114c44b716deddb4fef2c9/51e7460d8db445f992d7dd9e5c7272b3.jpeg" alt="Ancient Batwing" class="item-image">
       <button class="title-btn" onclick="viewDetails('Ancient Batwing')">Ancient Batwing</button>
-      <div class="item-price">300 Coins</div>
+      <div class="item-price">$2.99</div>
       <div class="btn-group">
-        <button class="btn btn-add" onclick="addToCart('Batwing', 300)">Add to Cart</button>
-        <button class="btn btn-buy" onclick="buyNow('Batwing', 300)">Buy Now</button>
+        <button class="btn btn-add" onclick="addToCart('Batwing', 2.99)">Add to Cart</button>
+        <button class="btn btn-buy" onclick="buyNow('Batwing', 2.99)">Buy Now</button>
       </div>
     </div>
 
@@ -245,7 +264,7 @@
       <button class="close-btn" onclick="toggleCart()">✕</button>
     </div>
     <ul class="cart-items" id="cartList"></ul>
-    <h3>Total: <span id="cartTotal">0</span> Coins</h3>
+    <h3>Total: $<span id="cartTotal">0.00</span></h3>
     <button class="btn btn-buy checkout-btn" onclick="checkout()">Buy Now (Checkout)</button>
   </div>
 
@@ -258,7 +277,7 @@
     }
 
     function buyNow(itemName, price) {
-      alert(`Proceeding to instant checkout for: ${itemName} (${price} Coins)`);
+      alert(`Proceeding to instant checkout for: ${itemName} ($${price.toFixed(2)})`);
     }
 
     function viewDetails(itemName) {
@@ -279,13 +298,13 @@
 
       cart.forEach((item) => {
         const li = document.createElement('li');
-        li.textContent = `${item.name} - ${item.price} Coins`;
+        li.textContent = `${item.name} - $${item.price.toFixed(2)}`;
         cartList.appendChild(li);
         total += item.price;
       });
 
       cartCount.textContent = cart.length;
-      cartTotal.textContent = total;
+      cartTotal.textContent = total.toFixed(2);
     }
 
     function checkout() {
@@ -293,7 +312,7 @@
         alert('Your cart is empty!');
         return;
       }
-      alert(`Successfully purchased ${cart.length} item(s) for ${document.getElementById('cartTotal').textContent} Coins!`);
+      alert(`Successfully purchased ${cart.length} item(s) for $${document.getElementById('cartTotal').textContent}!`);
       cart = [];
       updateCartUI();
       toggleCart();
